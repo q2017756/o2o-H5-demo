@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <script src="./promise1.js"></script> -->
+  <script src="./promise2.js"></script>
+  <script>
+
+    const asyncFn = (resolve, reject) => {
+      console.log('this is asyncFn')
+      setTimeout(() => {
+        resolve('this is from async cb message')
+        resolve('this is two')
+      }, 200)
+    }
+    const syncFn = (resolve, reject) => {
+      console.log('this is syncFn')
+      resolve('this is from sync cb message')
+    }
+
+    // 最简单的例子
+    const p1 = new MyPromise(asyncFn)
+    p1.then((res) => {
+      console.log(1, res)
+    })
+    // 单一状态，重复调用then
+    p1.then((res) => {
+      console.log(2, res)
+    })
+    setTimeout(() => {
+      p1.then(res => {
+        console.log(3, res)
+      })
+      p1.then(res => {
+        console.log(4, res)
+      })
+    }, 200)
+    // 链式调用
+    p1.then(res1 => {
+      return 'res1'
+    }).then(res2 => {
+      console.log(5, res2)
+    })
+    // 同步转异步
+    const p2 = new MyPromise(syncFn)
+    p2.then(res => {
+      console.log('p2', res)
+    })
+    p2.then(res => {
+      console.log('p23', res)
+    })
+    console.log('this is current task')
+  </script>
+</body>
+</html>
