@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./generater.js"></script>
+  <script>
+    // let a = 1
+    function *generaterFn(b) {
+      // a++
+      // return 1
+      // yield 12;
+      console.log(111111111)
+      console.log(2222, yield '第一个')
+      const c = (yield '第二个')
+      console.log(22222)
+      const d = (yield `第三个${c}`) * 2
+      console.log(333333)
+      // a++
+      yield d;
+      // return 3
+      // return 14
+      console.log(4444)
+    }
+    const g = generaterFn(0)
+    console.log('start')
+    const g1 = g.next('第一个next的入参')
+    console.log('第一个next', g1.value)
+    const g2 = g.next('第一个next的入参')
+    console.log('第一个next', g2.value)
+    const g3 = g.next(33)
+    console.log('第一个next', g3.value)
+    const g4 = g.next(44)
+    console.log('第一个next', g4.value)
+  </script>
+</body>
+</html>
